@@ -7,6 +7,7 @@ const authRouter = require("./routes/authRoute");
 const postRouter = require("./routes/postRoute");
 const userRouter = require("./routes/userRoute");
 const messageRoute=require("./routes/messageRoute")
+const notificationRoute=require("./routes/notificationRoute")
 const passport = require("passport"); 
 require("./controllers/googleController"); 
 const {app,server}=require("./socketIO/server")
@@ -28,7 +29,8 @@ app.use(passport.initialize());
 app.use("/api/auth", authRouter);
 app.use("/api/users", postRouter); 
 app.use("/api/users", userRouter);
-app.use("/api/message/",messageRoute)
+app.use("/api/message/",messageRoute);
+app.use("/api/notification",notificationRoute)
 
 
 const PORT = process.env.PORT || 8080;

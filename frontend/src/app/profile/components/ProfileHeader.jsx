@@ -149,8 +149,8 @@ const ProfileHeader = ({ id, profileData, isOwner, setProfileData }) => {
           </Avatar>
           <div className="mt-4 md:mt-0 text-center md:text-left flex-grow">
             <h1 className="text-2xl font-bold">{profileData?.username}</h1>
-            <p className="text-gray-400 font-semibold">
-              {profileData?.followerCount}
+            <p className="text-black/50 font-semibold">
+              {profileData?.followerCount} <span className="fonr-semibold">Friends</span>
             </p>
           </div>
           {isOwner && (

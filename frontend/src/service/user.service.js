@@ -64,6 +64,9 @@ export const fetchUserProfile = async (userId) => {
     }
 };
 
+
+
+
 export const getMutualFriends = async () => {
     try {
         const response = await axiosInstance.get(`/api/users/mutual-friends`);

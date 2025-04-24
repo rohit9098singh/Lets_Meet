@@ -16,9 +16,11 @@ export const registerUser = async (userData) => {
 export const loginUser = async (userData) => {
   try {
     const response = await axiosInstance.post("/api/auth/login", userData);
-        return response.data;
+    console.log("Login response data:", response.data);
+    return response.data;
   } catch (error) {
-    console.log(error);
+    console.error("Login error:", error.response?.data || error.message);
+    return null; // Ensure caller doesn't get undefined
   }
 };
 

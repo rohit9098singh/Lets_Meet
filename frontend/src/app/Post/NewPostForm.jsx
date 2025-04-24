@@ -47,12 +47,11 @@ const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen }) => {
   const { handleCreatePost } = usePostStore();
   const userPlaceholder = user?.username
     ?.split(" ")
-    .filter(Boolean) // Remove extra spaces
+    .filter(Boolean) 
     .map((word) => word[0])
     .join("")
     .toUpperCase();
 
-  // Handle file selection
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -62,7 +61,6 @@ const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen }) => {
     setFilePreview(URL.createObjectURL(file));
   };
 
-  // Handle post submission
   const handlePost = async () => {
     try {
       setLoading(true);
@@ -87,7 +85,6 @@ const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen }) => {
     }
   };
 
-  // Toggle emoji picker
   const handleEmojiClick = (emojiObject) => {
     setPostContent((prev) => prev + emojiObject.emoji);
   };

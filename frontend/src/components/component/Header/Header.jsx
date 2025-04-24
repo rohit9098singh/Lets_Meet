@@ -134,12 +134,17 @@ const Header = () => {
       <div className="mx-auto flex justify-between items-center p-2 px-4 md:px-8">
         {/* Logo and Search Bar */}
         <div className="flex items-center gap-4">
-          <p
+        <img
+         onClick={handleRouteToHome}
+         src="/Lets_meet_Logo.png" alt="Lets_Meet" className="w-10 cursor-pointer h-auto" 
+        />
+
+          {/* <p
             onClick={handleRouteToHome}
             className="text-md font-semibold cursor-pointer"
           >
             Let's Meet
-          </p>
+          </p> */}
           <div className="relative">
             <div>
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />

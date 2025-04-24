@@ -146,14 +146,15 @@ const getAllFriendRequest = async (req, res) => {
   try {
     const loggedInUserId = req.user.userId;
 
-    if (!loggedInUser) {
-      return response(res, 404, "User Not Found");
-    }
-
+    
     // Find the logged-in user's followers and followings
     const loggedInUser = await User.findById(loggedInUserId).select(
       "followers followings"
     );
+    
+    if (!loggedInUser) {
+      return response(res, 404, "User Not Found");
+    }
 
 
     // Find users who follow the logged-in user but are not followed back by the logged-in user
@@ -175,7 +176,7 @@ const getAllFriendRequest = async (req, res) => {
   }
 };
 
-// ye ek tarah ka mutul friends ka hai api
+// friend suggestion ke liye
 const getAllUserForRequest = async (req, res) => {
   try {
     const loggedInUserId = req.user.userId;
@@ -341,8 +342,67 @@ const getUserProfile = async (req, res) => {
     return response(res, 500, "internal server error", error.message);
   }
 };
+  
+//ye mutual friends ka acutal api hai
 
+// const getAllMutualFriends = async (req, res) => {
+//   try {
+//     // 🧑‍💻 Step 1: Logged-in user ka ID (maan lo U1 - Rohit)
+//     const loggedInUserId = req.user.userId;  // => "U1"
 
+//     // 🧐 Step 2: Rohit ke followings le lo (U2, U3, U4)
+//     const loggedInUser = await User.findById(loggedInUserId).select("followings");
+
+//     if (!loggedInUser) {
+//       return res.status(404).json({ message: "User Not Found" });
+//     }
+
+//     // 🧾 Followings ko string me convert karo
+//     const myFollowings = loggedInUser.followings.map((id) => id.toString());
+//     // => ["U2", "U3", "U4"]
+
+//     const mutualMap = new Map(); // 🗺️ Mutual friend counter
+
+//     // 🔍 Step 3: Ab U2, U3, U4 ke followings nikaalo
+//     const followingsData = await User.find({ _id: { $in: myFollowings } }).select("followings");
+
+//     // 🤹‍♂️ Step 4: Har user ke followings par loop
+//     followingsData.forEach((user) => {
+//       user.followings.forEach((followedUserId) => {
+//         const idStr = followedUserId.toString();
+
+//         // ❌ Agar user khud hai (U1) ya Rohit ke already followings hai to skip karo
+//         if (idStr === loggedInUserId || myFollowings.includes(idStr)) return;
+
+//         // ➕ Map me count badhao
+//         mutualMap.set(idStr, (mutualMap.get(idStr) || 0) + 1);
+//       });
+//     });
+
+//     // 📦 mutualMap ab kuch aisa dikhega:
+//     // {
+//     //   "U5" => 2,  // (U2 & U3 dono ne follow kiya)
+//     //   "U6" => 2,  // (U2 & U4 dono ne follow kiya)
+//     //   "U7" => 1,  // (U3 ne follow kiya)
+//     //   "U8" => 1   // (U4 ne follow kiya)
+//     // }
+
+//     const mutualFriendIds = Array.from(mutualMap.keys());
+//     // => ["U5", "U6", "U7", "U8"]
+
+//     // 📛 Step 5: Ab in mutuals ke full details fetch karo
+//     const mutualFriends = await User.find({ _id: { $in: mutualFriendIds } }).select(
+//       "username profilePicture email followerCount followingCount"
+//     );
+
+//     //  Success response
+//     return response(res, 200, "Mutual friends fetched successfully", mutualFriends);
+
+//   } catch (error) {
+//     //  Error handling
+//     return response(res, 500, "Internal Server Error", error.message);
+//   }
+// };
 
 module.exports = {
   followUser,

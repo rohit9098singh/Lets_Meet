@@ -26,7 +26,7 @@ import { GoogleSVG } from "../../../utils";
 import { registerSchema, loginSchema } from "./validation/schema";
 import toast from "react-hot-toast";
 import { Eye, EyeOff } from "lucide-react";
-import { loginUser, registerUser } from "@/service/auth.service"; // Assuming login service is here
+import { loginUser, registerUser } from "@/service/auth.service";
 
 const Page = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -92,7 +92,7 @@ const Page = () => {
   const onClick = (data) => {
     console.log(data);
   };
-  console.log(isLoading);
+  // console.log(isLoading);
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-400 to-purple-600">
       <motion.div
