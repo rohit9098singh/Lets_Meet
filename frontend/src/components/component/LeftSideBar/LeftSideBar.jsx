@@ -52,7 +52,7 @@ const LeftSidebar = () => {
     { icon: <VideoIcon size={24} />, path: "/video-feed", name: "Videos" },
     { icon: <User size={24} />, path: `/profile/${userId}`, name: "Profile" },
     { icon: <MessageCircle size={24} />, path: "/messages", name: "Messages" },
-    { icon: <Bell size={24} />, path: "/notifications", name: "Notifications" },
+    // { icon: <Bell size={24} />, path: "/notifications", name: "Notifications" },
   ];
 // console.log(isSidebarOpen)
   return (

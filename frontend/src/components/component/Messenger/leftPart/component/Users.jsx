@@ -31,7 +31,7 @@ const Users = ({ users, setSelectedUser, selectedUser }) => {
                 onClick={() => setSelectedUser(user)} // Select user on click
                 className={`flex items-center space-x-4 p-3 rounded-xl bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 transition-all cursor-pointer ${
                   selectedUser?._id === user._id
-                    ? "bg-gray-300 dark:bg-slate-700"
+                    ? "bg-gray-400/70 dark:bg-slate-700"
                     : ""
                 }`}
               >

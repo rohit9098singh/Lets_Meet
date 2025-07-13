@@ -25,9 +25,17 @@ export const loginUser = async (userData) => {
 };
 
 // for logout functionlity
-export const logoutUser = async (userData) => {
+// export const logoutUser = async (userData) => {
+//   try {
+//     const response = await axiosInstance.get("/api/auth/logout",userData);
+//       return response.data;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+export const logoutUser = async () => {
   try {
-    const response = await axiosInstance.get("/api/auth/logout",userData);
+    const response = await axiosInstance.get("/api/auth/logout");
       return response.data;
   } catch (error) {
     console.log(error);

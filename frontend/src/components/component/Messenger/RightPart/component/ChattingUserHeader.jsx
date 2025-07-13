@@ -50,14 +50,14 @@ const ChattingUserHeader = ({ user }) => {
         </div>
       </div>
 
-      <div className="flex items-center gap-3">
+      {/* <div className="flex items-center gap-3">
         <button className="p-2 rounded-full bg-blue-100 dark:bg-blue-700/30 hover:bg-blue-200 dark:hover:bg-blue-600 transition">
           <VideoIcon size={22} className="text-blue-500 dark:text-blue-400" />
         </button>
         <button className="p-2 rounded-full bg-green-100 dark:bg-green-700/30 hover:bg-green-200 dark:hover:bg-green-600 transition">
           <Phone size={22} className="text-green-500 dark:text-green-400" />
         </button>
-      </div>
+      </div> */}
     </Card>
   );
 };

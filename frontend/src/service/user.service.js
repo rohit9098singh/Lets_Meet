@@ -59,7 +59,7 @@ export const fetchUserProfile = async (userId) => {
         const response = await axiosInstance.get(`/api/users/profile/${userId}`);
         return response?.data?.data;
     } catch (error) {
-        console.error(error);
+       console.error("Fetch User Profile Error:", error.response || error.message || error);
         throw error;
     }
 };

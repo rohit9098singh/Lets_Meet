@@ -24,7 +24,7 @@ import { formatData } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { usePostStore } from "@/store/usePostStore";
 
-const Postcard = ({isOwner, post, isLiked, onShare, onComments, onLike }) => {
+const Postcard = ({ isOwner, post, isLiked, onShare, onComments, onLike }) => {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [isDeletePostDropDownOpen, setIsDeletePostDropDownOpen] =
     useState(false);
@@ -33,8 +33,7 @@ const Postcard = ({isOwner, post, isLiked, onShare, onComments, onLike }) => {
   const { user } = userStore();
   const router = useRouter();
   const dropdownRef = useRef(null);
-  const {handleDeletePost}=usePostStore();
-
+  const { handleDeletePost } = usePostStore();
 
   const userPostPlaceholder = user?.username
     ?.split(" ") // Split into words
@@ -43,9 +42,9 @@ const Postcard = ({isOwner, post, isLiked, onShare, onComments, onLike }) => {
     .join("")
     .toUpperCase();
 
-    const onDelete = (postId) => {
-      handleDeletePost(postId);
-    };
+  const onDelete = (postId) => {
+    handleDeletePost(postId);
+  };
 
   // Generate a sharable link
   const generateSharableLink = () => {
@@ -167,10 +166,10 @@ const Postcard = ({isOwner, post, isLiked, onShare, onComments, onLike }) => {
               ref={dropdownRef}
               className="absolute right-0 mt-2 w-40 bg-white dark:bg-neutral-700 border border-gray-300 dark:border-gray-600 rounded shadow-lg z-10"
             >
-              
               <button
-              onClick={() => onDelete(post._id)}
-              className="flex items-center gap-2 w-full px-4 py-2 text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600">
+                onClick={() => onDelete(post._id)}
+                className="flex items-center gap-2 w-full px-4 py-2 text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600"
+              >
                 <Trash size={18} />
                 Delete Post
               </button>
@@ -185,14 +184,14 @@ const Postcard = ({isOwner, post, isLiked, onShare, onComments, onLike }) => {
           <img
             src={post.mediaUrl}
             alt="Image Post"
-            className="w-full max-h-[400px] sm:max-h-[300px] md:max-h-[350px] lg:max-h-[400px] object-cover rounded-lg mb-4"
+            className="w-full h-[400px] rounded-lg mb-4 object-contain"
           />
         )}
         {post.mediaUrl && post.mediaType === "video" && (
           <video
             controls
             src={post.mediaUrl}
-            className="w-full max-h-[400px] sm:max-h-[300px] md:max-h-[350px] lg:max-h-[400px] object-cover rounded-lg mb-4"
+            className="w-full h-[400px] rounded-lg mb-4 object-contain"
           >
             Your browser does not support this video.
           </video>
