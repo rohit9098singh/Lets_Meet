@@ -17,9 +17,19 @@ dotenv.config();
 app.use(express.json());
 // Removed cookie-parser since we're using localStorage tokens
 
-const corsOptions = {
-    origin: process.env.FRONTEND_URL,
-    // Removed credentials since we're not using cookies
+const allowedOrigins = [
+  "https://lets-meet-l.vercel.app",
+  "http://localhost:3000"
+];
+const corsOption = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS" ));
+    }
+  },
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
