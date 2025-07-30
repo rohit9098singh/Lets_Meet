@@ -189,13 +189,13 @@ const Page = () => {
                       {isLoading ? "Logging in..." : "Login"}
                     </Button>
                   </form>
-                  <Button
+                  {/* <Button
                     variant="outline"
                     className="w-full flex items-center justify-center gap-2 mt-2 bg-gray-300 dark:bg-gray-400 dark:hover:bg-gray-500 hover:bg-gray-400"
                     onClick={handleGoogleLogin}
                   >
                     <GoogleSVG /> Continue with Google
-                  </Button>
+                  </Button> */}
                 </Form>
               </TabsContent>
 
@@ -309,13 +309,13 @@ const Page = () => {
                       {isLoading ? "Signing up..." : "Signup"}
                     </Button>
                   </div>
-                  <Button
+                  {/* <Button
                     variant="outline"
                     className="w-full flex items-center justify-center gap-2 mt-2 bg-gray-300 dark:bg-gray-400 dark:hover:bg-gray-500 hover:bg-gray-400"
                     onClick={handleGoogleLogin}
                   >
                     <GoogleSVG /> Continue with Google
-                  </Button>
+                  </Button> */}
                 </Form>
               </TabsContent>
             </Tabs>
