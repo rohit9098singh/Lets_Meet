@@ -16,7 +16,7 @@ import userStore from "@/store/userStore";
 import toast from "react-hot-toast";
 
 const LeftSidebar = () => {
-  const { isSidebarOpen, toggleSidebar } = useSidebarStore();
+  const { isSidebarOpen, toggleSidebar } =  useSidebarStore();
   const leftSidebarRef = useRef(null);
   const { user, clearUser } = userStore();
   const userId = user?._id || "";

@@ -4,9 +4,10 @@ import Loader from "@/lib/Loader";
 import { checkUserAuth, logoutUser, setAuthToken } from "@/service/auth.service";
 import userStore from "@/store/userStore";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, Suspense } from "react";
 
-export default function AuthWrapper({ children }) {
+// Separate component that uses useSearchParams
+function AuthWrapperContent({ children }) {
   const { setUser, clearUser } = userStore();
   const router = useRouter();
   const pathname = usePathname();
@@ -15,6 +16,7 @@ export default function AuthWrapper({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const isLoginPage = pathname === "/userLogin";
+  const is404Page = pathname === "/404" || pathname === "/_not-found";
 
   // Handle Google OAuth token from URL parameters
   useEffect(() => {
@@ -58,18 +60,36 @@ export default function AuthWrapper({ children }) {
   }, [setUser, handleLogout]);
 
   useEffect(() => {
-    if (!isLoginPage) checkAuth();
-    else setLoading(false);
-  }, [isLoginPage, checkAuth]);
+    // Skip authentication check for 404 pages and login page
+    if (is404Page || isLoginPage) {
+      setLoading(false);
+      return;
+    }
+    checkAuth();
+  }, [isLoginPage, is404Page, checkAuth]);
 
   // 🔹 Loader Handling (Simplified)
-  if (loading || (!isAuthenticated && !isLoginPage)) return <Loader />;
+  if (loading || (!isAuthenticated && !isLoginPage && !is404Page)) return <Loader />;
+
+  // For 404 pages, just render children without header
+  if (is404Page) {
+    return <>{children}</>;
+  }
 
   return (
     <>
       {!isLoginPage && isAuthenticated && <Header />}
       {children}
     </>
+  );
+}
+
+// Main component with Suspense boundary
+export default function AuthWrapper({ children }) {
+  return (
+    <Suspense fallback={<Loader />}>
+      <AuthWrapperContent>{children}</AuthWrapperContent>
+    </Suspense>
   );
 }
 
