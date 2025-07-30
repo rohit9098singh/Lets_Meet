@@ -32,7 +32,7 @@ const corsOption = {
   credentials: true,
 };
 
-app.use(cors(corsOptions));
+app.use(cors(corsOption));
 app.use(passport.initialize()); 
 
 app.use("/api/auth", authRouter);
