@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Left from "@/components/component/Messenger/LeftPart/Left";
+import Left from "@/components/component/Messenger/leftPart/Left";
 import Right from "@/components/component/Messenger/RightPart/Right";
 import { userFriendStore } from "@/store/userFriendStore";
 
