@@ -65,7 +65,7 @@ const ProfileHeader = ({ id, profileData, isOwner, setProfileData }) => {
       setIsEditProfileModal(false);
       setProfilePicturePreview(null);
       setUser(updatedProfile);
-      await fetchUserProfile();
+      await fetchUserProfile(id);
     } catch (error) {
       console.error("Error updating the user profile", error);
     } finally {

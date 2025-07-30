@@ -258,7 +258,15 @@ const ProfileDetails = ({
         isOpen={isEditBioModal}
         onClose={() => setIsEditBioModal(!isEditBioModal)}
         fetchProfile={fetchProfile}
-        initialData={profileData?.bio}
+        initialData={{
+          bioText: profileData?.bioText || "",
+          liveIn: profileData?.liveIn || "",
+          relationShip: profileData?.relationShip || "",
+          workPlace: profileData?.workPlace || "",
+          education: profileData?.education || "",
+          phone: profileData?.phone || "",
+          homeTown: profileData?.homeTown || "",
+        }}
         id={id}
         isOwner={isOwner}
       />

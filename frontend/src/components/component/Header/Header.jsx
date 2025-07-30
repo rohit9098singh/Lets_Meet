@@ -112,7 +112,7 @@ const Header = () => {
       clearUser();
     } catch (error) {
       console.log(error);
-      toast.error("Something went wrong, try again later");
+      toast.error("Something went wrong, try again later ");
     }
   };
 
