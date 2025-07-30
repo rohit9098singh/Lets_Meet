@@ -19,8 +19,8 @@ router.get("/google/callback",passport.authenticate("google",{failureRedirect:`$
  (req,res)=>{
     const accessToken = generateToken(req?.user);
 
-    res.cookie("auth_token", accessToken, { httpOnly: true });
-    res.redirect(`${process.env.FRONTEND_URL}`)
+    // Redirect with token as URL parameter instead of setting cookie
+    res.redirect(`${process.env.FRONTEND_URL}?token=${accessToken}`)
  }
 )
 

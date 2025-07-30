@@ -24,11 +24,11 @@ const registerUser = async (req, res) => {
 
         const accessToken = generateToken(newUser);
 
-        res.cookie("auth_token", accessToken, { httpOnly: true });
-
+        // Return token in response instead of setting cookie
         return response(res, 201, "User created successfully", {
             username: newUser.username,
-            email: newUser.email
+            email: newUser.email,
+            token: accessToken
         });
 
     } catch (error) {
@@ -53,11 +53,11 @@ const loginUser = async (req, res) => {
 
         const accessToken = generateToken(user);  
 
-        res.cookie("auth_token", accessToken, { httpOnly: true });
-
+        // Return token in response instead of setting cookie
         return response(res, 200, "User logged in successfully", {  
             username: user.username,
-            email: user.email
+            email: user.email,
+            token: accessToken
         });
 
     } catch (error) {
@@ -66,20 +66,14 @@ const loginUser = async (req, res) => {
     }
 };
 
-
-
-const logout=(req,res)=>{
+const logout = (req, res) => {
     try {
-        res.cookie("auth_token","",{
-            httpOnly:true,
-            expires:new Date(0)
-        })
-        return response(res,200,"user logged out successfully")
+        // No need to clear cookies since we're using localStorage
+        return response(res, 200, "User logged out successfully");
     } catch (error) {
         console.log(error);
         return response(res, 500, "Internal server error", error.message);
     }
+};
 
-}
-
-module.exports = {registerUser,loginUser,logout};
+module.exports = { registerUser, loginUser, logout };

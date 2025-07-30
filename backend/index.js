@@ -1,5 +1,4 @@
 const express = require("express");
-const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const connectDb = require("./config/db");
@@ -16,11 +15,11 @@ dotenv.config();
 
 // const app = express();
 app.use(express.json());
-app.use(cookieParser());
+// Removed cookie-parser since we're using localStorage tokens
 
 const corsOptions = {
     origin: process.env.FRONTEND_URL,
-    credentials: true, 
+    // Removed credentials since we're not using cookies
 };
 
 app.use(cors(corsOptions));

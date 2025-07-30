@@ -4,6 +4,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { LogOut } from "lucide-react";
 import toast from "react-hot-toast";
+import { logoutUser } from "@/service/auth.service";
 
 const Logout = () => {
   const router = useRouter();
@@ -11,6 +12,7 @@ const Logout = () => {
 
   const handleLogout = async () => {
     try {
+      await logoutUser(); // This will clear localStorage token
       clearUser();
       router.push("/userLogin");
       toast.success("User logged out successfully");

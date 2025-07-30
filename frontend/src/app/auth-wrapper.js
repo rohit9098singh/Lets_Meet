@@ -1,19 +1,31 @@
 "use client";
 import Header from "@/components/component/Header/Header";
 import Loader from "@/lib/Loader";
-import { checkUserAuth, logoutUser } from "@/service/auth.service";
+import { checkUserAuth, logoutUser, setAuthToken } from "@/service/auth.service";
 import userStore from "@/store/userStore";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect, useCallback } from "react";
 
 export default function AuthWrapper({ children }) {
   const { setUser, clearUser } = userStore();
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const isLoginPage = pathname === "/userLogin";
+
+  // Handle Google OAuth token from URL parameters
+  useEffect(() => {
+    const token = searchParams.get('token');
+    if (token) {
+      setAuthToken(token);
+      // Remove token from URL
+      const newUrl = pathname;
+      router.replace(newUrl);
+    }
+  }, [searchParams, pathname, router]);
 
   // 🔹 Handle Logout (Moved Outside for Better Structure)
   const handleLogout = useCallback(async () => {
